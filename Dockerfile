@@ -12,10 +12,10 @@ ADD opt/qnib/bin/start_nginx.sh /opt/qnib/bin/
 
 ## Kibana
 ENV KIBANA_VER 3.1.2
+WORKDIR /var/www/
 RUN curl -s -o /opt/kibana-${KIBANA_VER}.tar.gz https://download.elasticsearch.org/kibana/kibana/kibana-${KIBANA_VER}.tar.gz && \
-    tar xf /opt/kibana-${KIBANA_VER}.tar.gz && \
-    mkdir -p /var/www/; ln -s /opt/kibana-${KIBANA_VER} /var/www/kibana
-ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
+    tar xf /opt/kibana-${KIBANA_VER}.tar.gz && rm -f /opt/kibana-${KIBANA_VER}.tar.gz && \
+    mv /var/www/kibana-${KIBANA_VER} /var/www/kibana/
 
 # Config kibana-Dashboards
 ADD var/www/kibana/app/dashboards/ /var/www/kibana/app/dashboards/
