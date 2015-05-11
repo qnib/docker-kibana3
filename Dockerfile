@@ -17,6 +17,8 @@ RUN curl -s -o /opt/kibana-${KIBANA_VER}.tar.gz https://download.elasticsearch.o
     tar xf /opt/kibana-${KIBANA_VER}.tar.gz && rm -f /opt/kibana-${KIBANA_VER}.tar.gz && \
     mv /var/www/kibana-${KIBANA_VER} /var/www/kibana/
 
+ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
+
 # Config kibana-Dashboards
 ADD var/www/kibana/app/dashboards/ /var/www/kibana/app/dashboards/
 ADD var/www/kibana/config.js /var/www/kibana/config.js

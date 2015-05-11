@@ -44,7 +44,7 @@
       "collapsable": true,
       "panels": [
         {
-          "span": 8,
+          "span": 12,
           "editable": true,
           "type": "histogram",
           "loadingEditor": false,
@@ -147,7 +147,7 @@
           },
           "overflow": "min-height",
           "fields": [
-            "timestamp",
+            "@timestamp",
             "logsource",
             "program",
             "message"
@@ -167,7 +167,7 @@
           },
           "field_list": false,
           "status": "Stable",
-          "trimFactor": 300,
+          "trimFactor": 450,
           "normTimes": true,
           "all_fields": false
         }
