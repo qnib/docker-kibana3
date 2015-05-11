@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 5
+
 ## set htpasswd
 if [ "X${HTUSER}" != "X" ];then
     if [ "X${HTPASSWD}" == "X" ];then
