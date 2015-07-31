@@ -158,7 +158,6 @@
           "overflow": "min-height",
           "fields": [
             "@timestamp",
-            "logsource",
             "host",
             "program",
             "message"
