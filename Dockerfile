@@ -1,5 +1,4 @@
 FROM qnib/terminal
-MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 ## nginx
 RUN yum install -y nginx httpd-tools
