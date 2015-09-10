@@ -1,7 +1,7 @@
-FROM qnib/terminal
+FROM qnib/terminal:fd22
 
 ## nginx
-RUN yum install -y nginx httpd-tools
+RUN dnf install -y nginx httpd-tools
 ADD etc/nginx/ /etc/nginx/
 ADD etc/diamond/collectors/NginxCollector.conf /etc/diamond/collectors/NginxCollector.conf
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/
