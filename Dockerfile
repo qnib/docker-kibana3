@@ -1,8 +1,7 @@
-FROM qnib/terminal:light
-MAINTAINER "Christian Kniep <christian@qnib.org>"
+FROM qnib/terminal:fd22
 
 ## nginx
-RUN yum install -y nginx httpd-tools
+RUN dnf install -y nginx httpd-tools
 ADD etc/nginx/ /etc/nginx/
 ADD etc/diamond/collectors/NginxCollector.conf /etc/diamond/collectors/NginxCollector.conf
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/
@@ -15,7 +14,7 @@ ENV KIBANA_VER 3.1.2
 WORKDIR /var/www/
 RUN curl -s -o /opt/kibana-${KIBANA_VER}.tar.gz https://download.elasticsearch.org/kibana/kibana/kibana-${KIBANA_VER}.tar.gz && \
     tar xf /opt/kibana-${KIBANA_VER}.tar.gz && rm -f /opt/kibana-${KIBANA_VER}.tar.gz && \
-    mv kibana-${KIBANA_VER} kibana
+    mv /var/www/kibana-${KIBANA_VER} /var/www/kibana/
 
 ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
 
