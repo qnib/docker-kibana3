@@ -1,0 +1,64 @@
+consul:
+    image: qnib/consul
+    hostname: consul
+    dns: 127.0.0.1
+    environment:
+     - DC_NAME=dc1
+     - BOOTSTRAP_CONSUL=true
+     - RUN_SERVER=true
+    ports:
+     - "8500:8500"
+
+kopf:
+  image: qnib/kopf
+  hostname: kopf
+  dns: 127.0.0.1
+  ports:
+   - 8088:80
+  environment:
+   - DC_NAME=dc1
+   - FORWARD_TO_LOGSTASH=false
+   - COLLECT_METRICS=false
+   - SKIP_PSWATCH=true
+   - SERVICE_8088_NAME=es-kopf
+   - BOOTSTRAP_CONSUL=false
+   - RUN_SERVER=false
+  links:
+   - consul:consul
+
+
+kibana3:
+  image: qnib/kibana3
+  ports:
+   - "80:80"
+  environment:
+  - DC_NAME=dc1
+  - FORWARD_TO_LOGSTASH=false
+  - CNT_TYPE=service
+  - SKIP_PSWATCH=true
+  - COLLECT_METRICS=false
+  dns: 127.0.0.1
+  hostname: kibana3
+  privileged: true
+  links:
+  - consul:consul
+
+elasticsearch:
+    image: qnib/elasticsearch
+    dns: 127.0.0.1
+    hostname: elasticsearch
+    ports:
+     - "9200:9200"
+    environment:
+     - DC_NAME=dc1
+     - ES_CLUSTER_NAME=meta
+     - FORWARD_TO_LOGSTASH=false
+     - COLLECT_METRICS=false
+     - SKIP_PSWATCH=true
+     - ES_TAGS=meta
+     - BOOTSTRAP_CONSUL=false
+     - RUN_SERVER=false
+    links:
+     - consul:consul
+    privileged: true
+
